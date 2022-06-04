@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Bay{% endblock %}
+
+{% block body %}
+    <h1>Create new Bay</h1>
+
+    {{ include('bay/_form.html.twig') }}
+
+    <a href="{{ path('app_bay_index') }}">back to list</a>
+{% endblock %}

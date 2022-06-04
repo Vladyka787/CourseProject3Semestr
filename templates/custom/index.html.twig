@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Custom index{% endblock %}
+
+{% block body %}
+    <h1>Custom index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CarInformation</th>
+                <th>OrderDate</th>
+                <th>OrderEndDate</th>
+                <th>OrderPayDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for custom in customs %}
+            <tr>
+                <td>{{ custom.id }}</td>
+                <td>{{ custom.CarInformation }}</td>
+                <td>{{ custom.OrderDate ? custom.OrderDate|date('Y-m-d') : '' }}</td>
+                <td>{{ custom.OrderEndDate ? custom.OrderEndDate|date('Y-m-d') : '' }}</td>
+                <td>{{ custom.OrderPayDate ? custom.OrderPayDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_custom_show', {'id': custom.id}) }}">show</a>
+                    <a href="{{ path('app_custom_edit', {'id': custom.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_custom_new') }}">Create new</a>
+{% endblock %}

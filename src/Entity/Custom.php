@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CustomRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,16 @@ class Custom
      * @ORM\JoinColumn(nullable=false)
      */
     private $Client;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Service::class, mappedBy="Custom", orphanRemoval=true)
+     */
+    private $Service;
+
+    public function __construct()
+    {
+        $this->Service = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +116,36 @@ class Custom
     public function setClient(?Client $Client): self
     {
         $this->Client = $Client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getService(): Collection
+    {
+        return $this->Service;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->Service->contains($service)) {
+            $this->Service[] = $service;
+            $service->setCustom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->Service->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getCustom() === $this) {
+                $service->setCustom(null);
+            }
+        }
 
         return $this;
     }

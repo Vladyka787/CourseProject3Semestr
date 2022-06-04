@@ -42,6 +42,11 @@ class Material
      */
     private $MaterialMeasure;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="Material")
+     */
+    private $Service;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class Material
     public function setMaterialMeasure(string $MaterialMeasure): self
     {
         $this->MaterialMeasure = $MaterialMeasure;
+
+        return $this;
+    }
+
+    public function getService(): ?Service
+    {
+        return $this->Service;
+    }
+
+    public function setService(?Service $Service): self
+    {
+        $this->Service = $Service;
 
         return $this;
     }

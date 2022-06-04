@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bay{% endblock %}
+
+{% block body %}
+    <h1>Bay</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bay.id }}</td>
+            </tr>
+            <tr>
+                <th>BayType</th>
+                <td>{{ bay.BayType }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bay_index') }}">back to list</a>
+
+    <a href="{{ path('app_bay_edit', {'id': bay.id}) }}">edit</a>
+
+    {{ include('bay/_delete_form.html.twig') }}
+{% endblock %}

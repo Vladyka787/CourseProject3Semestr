@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeOfWork index{% endblock %}
+
+{% block body %}
+    <h1>TypeOfWork index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TypeOfWorkName</th>
+                <th>TypeOfWorkSkills</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_of_work in type_of_works %}
+            <tr>
+                <td>{{ type_of_work.id }}</td>
+                <td>{{ type_of_work.TypeOfWorkName }}</td>
+                <td>{{ type_of_work.TypeOfWorkSkills }}</td>
+                <td>
+                    <a href="{{ path('app_type_of_work_show', {'id': type_of_work.id}) }}">show</a>
+                    <a href="{{ path('app_type_of_work_edit', {'id': type_of_work.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_of_work_new') }}">Create new</a>
+{% endblock %}
