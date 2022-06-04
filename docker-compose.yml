@@ -22,6 +22,16 @@ services:
     environment:
       POSTGRES_USER: pguser
       POSTGRES_PASSWORD: pguser
+  phppgadmin:
+    container_name: phppgadmin
+    image: neimheadh/phppgadmin:latest
+    ports:
+      - "100:80"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASS=pguser
   php:
     build: docker/images/php
     working_dir: /app
