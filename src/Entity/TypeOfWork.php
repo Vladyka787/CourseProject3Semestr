@@ -25,7 +25,7 @@ class TypeOfWork
     private $TypeOfWorkName;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=150)
      */
     private $TypeOfWorkSkills;
 
