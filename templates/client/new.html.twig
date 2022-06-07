@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Client{% endblock %}
+{% block title %}Добавление нового клиента{% endblock %}
 
 {% block body %}
-    <h1>Create new Client</h1>
+    <div class="container-fluid">
+        <h1>Добавить нового клиента</h1>
 
-    {{ include('client/_form.html.twig') }}
+        {{ include('client/_form.html.twig') }}
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
+        <a href="{{ path('app_client_index') }}" class="btn btn-outline-primary" style="margin-top: 1em;">К списку
+            клиентов</a>
+    </div>
 {% endblock %}

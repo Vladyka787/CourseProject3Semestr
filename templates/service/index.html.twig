@@ -1,39 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Service index{% endblock %}
+{% block title %}Услуги{% endblock %}
 
 {% block body %}
-    <h1>Service index</h1>
+    <div class="container-fluid">
+        <h1>Услуги</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>ServiceDescription</th>
-                <th>ServicePrice</th>
-                <th>ServiceCompleteDate</th>
-                <th>actions</th>
+                <th>Описание услуги</th>
+                <th>Стоимость услуги</th>
+                <th>Дата завершения</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for service in services %}
-            <tr>
-                <td>{{ service.id }}</td>
-                <td>{{ service.ServiceDescription }}</td>
-                <td>{{ service.ServicePrice }}</td>
-                <td>{{ service.ServiceCompleteDate ? service.ServiceCompleteDate|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
-                    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for service in services %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_service_show', {'id': service.id}) }}">{{ service.serviceDescription }}</a>
+                    </td>
+                    <td>{{ service.ServicePrice }}</td>
+                    <td>{{ service.ServiceCompleteDate ? service.ServiceCompleteDate|date('Y-m-d') : '' }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_service_new') }}">Create new</a>
+        <a href="{{ path('app_main_index') }}" class="btn btn-outline-success">На главную</a>
+    </div>
 {% endblock %}

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Custom;
 use App\Form\CustomType;
+use App\Repository\ClientRepository;
 use App\Repository\CustomRepository;
+use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,8 +53,12 @@ class CustomController extends AbstractController
      */
     public function show(Custom $custom): Response
     {
+        $client=$custom->getClient();
+        $services= $custom->getService()->getValues();
         return $this->render('custom/show.html.twig', [
             'custom' => $custom,
+            'client' => $client,
+            'services' => $services,
         ]);
     }
 

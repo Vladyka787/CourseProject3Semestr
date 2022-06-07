@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Bay{% endblock %}
+{% block title %}Добавить бокс{% endblock %}
 
 {% block body %}
-    <h1>Create new Bay</h1>
+    <div class="container-fluid">
+    <h1>Добавить бокс</h1>
 
     {{ include('bay/_form.html.twig') }}
 
-    <a href="{{ path('app_bay_index') }}">back to list</a>
+    <a href="{{ path('app_bay_index') }}" class="btn btn-primary" style="margin-top: 1em;">Вернуться к боксам</a>
+    </div>
 {% endblock %}

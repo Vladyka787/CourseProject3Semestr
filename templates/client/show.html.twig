@@ -1,38 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Client{% endblock %}
+{% block title %}{{ client.customerMiddleName }} {{ client.customerFirstName }} {{ client.customerLastName }}{% endblock %}
 
 {% block body %}
-    <h1>Client</h1>
+    <div class="container-fluid">
+        <h1>{{ client.customerMiddleName }} {{ client.customerFirstName }} {{ client.customerLastName }}</h1>
 
-    <table class="table">
-        <tbody>
+        <p>Телефон: {{ client.customerPhone }}</p>
+        <h3>Заказы:</h3>
+        {% for custom in customs %}
+            <p>
+                <a href="{{ path('app_custom_show', {'id': custom.id}) }}">{{ custom.carInformation }}</a>
+            </p>
+        {% else %}
             <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
+                <td colspan="6">no records found</td>
             </tr>
-            <tr>
-                <th>CustomerPhone</th>
-                <td>{{ client.CustomerPhone }}</td>
-            </tr>
-            <tr>
-                <th>CustomerFirstName</th>
-                <td>{{ client.CustomerFirstName }}</td>
-            </tr>
-            <tr>
-                <th>CustomerMiddleName</th>
-                <td>{{ client.CustomerMiddleName }}</td>
-            </tr>
-            <tr>
-                <th>CustomerLastName</th>
-                <td>{{ client.CustomerLastName }}</td>
-            </tr>
-        </tbody>
-    </table>
+        {% endfor %}
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
+        <p style="margin-bottom: 1em; margin-top: 1em;">
+            <a href="{{ path('app_client_index') }}" class="btn btn-outline-primary">К списку клиентов</a>
 
-    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
-
-    {{ include('client/_delete_form.html.twig') }}
+            <a href="{{ path('app_client_edit', {'id': client.id}) }}"
+               class="btn btn-outline-secondary">Редактировать</a>
+        </p>
+        {{ include('client/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

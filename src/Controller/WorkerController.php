@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Worker;
 use App\Form\WorkerType;
+use App\Repository\ServiceRepository;
 use App\Repository\WorkerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,10 +50,13 @@ class WorkerController extends AbstractController
     /**
      * @Route("/{id}", name="app_worker_show", methods={"GET"})
      */
-    public function show(Worker $worker): Response
+    public function show(Worker $worker, ServiceRepository $serviceRepository): Response
     {
+        $services = $serviceRepository->findBy(['Worker' => $worker->getId()]);
+
         return $this->render('worker/show.html.twig', [
             'worker' => $worker,
+            'services' => $services,
         ]);
     }
 
@@ -81,7 +85,7 @@ class WorkerController extends AbstractController
      */
     public function delete(Request $request, Worker $worker, WorkerRepository $workerRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$worker->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $worker->getId(), $request->request->get('_token'))) {
             $workerRepository->remove($worker, true);
         }
 

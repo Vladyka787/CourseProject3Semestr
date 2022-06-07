@@ -1,38 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Custom{% endblock %}
+{% block title %}{{ custom.carInformation }}{% endblock %}
 
 {% block body %}
-    <h1>Custom</h1>
+    <div class="container-fluid">
+        <h1>{{ custom.carInformation }}</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ custom.id }}</td>
-            </tr>
-            <tr>
-                <th>CarInformation</th>
-                <td>{{ custom.CarInformation }}</td>
-            </tr>
-            <tr>
-                <th>OrderDate</th>
+                <th>Дата начала</th>
                 <td>{{ custom.OrderDate ? custom.OrderDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>OrderEndDate</th>
+                <th>Дата окончания</th>
                 <td>{{ custom.OrderEndDate ? custom.OrderEndDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>OrderPayDate</th>
+                <th>Дата оплаты</th>
                 <td>{{ custom.OrderPayDate ? custom.OrderPayDate|date('Y-m-d') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
+            {% for service in services %}
+            <tr>
+                <th>{{ service.serviceDescription }}</th>
+                <td><a href="{{ path('app_service_show', {'id': service.id}) }}" class="btn btn-outline-primary">К услуге</a></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th>{{ client.customerMiddleName }} {{ client.customerFirstName }} {{ client.customerLastName }}</th>
+                <td><a href="{{ path('app_client_show', {'id': client.id}) }}" class="btn btn-outline-primary">К заказчику</a></td>
+            </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_custom_index') }}">back to list</a>
+        <a href="{{ path('app_custom_index') }}" class="btn btn-primary">Вернуться к заказам</a>
 
-    <a href="{{ path('app_custom_edit', {'id': custom.id}) }}">edit</a>
+        <a href="{{ path('app_custom_edit', {'id': custom.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
 
-    {{ include('custom/_delete_form.html.twig') }}
+        {{ include('custom/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

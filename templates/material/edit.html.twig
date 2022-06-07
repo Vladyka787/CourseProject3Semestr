@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Material{% endblock %}
+{% block title %}Редактирование материала{% endblock %}
 
 {% block body %}
-    <h1>Edit Material</h1>
+    <div class="container-fluid">
+        <h1>Редактор материала</h1>
 
-    {{ include('material/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('material/_form.html.twig', {'button_label': 'Обновить'}) }}
 
-    <a href="{{ path('app_material_index') }}">back to list</a>
+        <a href="{{ path('app_material_index') }}" class="btn btn-primary" style="margin-top: 1em;">Вернуться к
+            материалам</a>
 
-    {{ include('material/_delete_form.html.twig') }}
+        {{ include('material/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}

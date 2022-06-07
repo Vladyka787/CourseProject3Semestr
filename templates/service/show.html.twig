@@ -1,34 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Service{% endblock %}
+{% block title %}{{ service.serviceDescription }}{% endblock %}
 
 {% block body %}
-    <h1>Service</h1>
+    <div class="container-fluid">
+        <h1>{{ service.serviceDescription }}</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ service.id }}</td>
-            </tr>
-            <tr>
-                <th>ServiceDescription</th>
-                <td>{{ service.ServiceDescription }}</td>
-            </tr>
-            <tr>
-                <th>ServicePrice</th>
+                <th>Стоимость услуги</th>
                 <td>{{ service.ServicePrice }}</td>
             </tr>
             <tr>
-                <th>ServiceCompleteDate</th>
+                <th>Дата завершения</th>
                 <td>{{ service.ServiceCompleteDate ? service.ServiceCompleteDate|date('Y-m-d') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+                <th>В каком боксе</th>
+                <td>Бокс №{{ bay.id }} ({{ bay.bayType }})</td>
+            </tr>
+            <tr>
+                <th>Кто занимается</th>
+                <td><a href="{{ path('app_worker_show', {'id': worker.id}) }}">{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}</a></td>
+            </tr>
+            <tr>
+                <th>К какому заказу относится</th>
+                <td><a href="{{ path('app_custom_show', {'id': custom.id}) }}">{{ custom.carInformation }}</a></td>
+            </tr>
+            {% for material in materials %}
+            <tr>
+                <th><a href="{{ path('app_material_show', {'id': material.id}) }}">{{ material.materialName }}</a></th>
+                <td>{{ material.materialAmount }} {{ material.materialMeasure }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_service_index') }}">back to list</a>
+        <a href="{{ path('app_service_index') }}" class="btn btn-primary">Вернуться к услугам</a>
 
-    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
+        <a href="{{ path('app_service_edit', {'id': service.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
 
-    {{ include('service/_delete_form.html.twig') }}
+        {{ include('service/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

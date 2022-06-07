@@ -1,43 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Material index{% endblock %}
+{% block title %}Материалы{% endblock %}
 
 {% block body %}
-    <h1>Material index</h1>
+    <div class="container-fluid">
+        <h1>Материалы</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>MaterialName</th>
-                <th>MaterialPrice</th>
-                <th>MaterialDescription</th>
-                <th>MaterialAmount</th>
-                <th>MaterialMeasure</th>
-                <th>actions</th>
+                <th>Название</th>
+                <th>Стоимость</th>
+                <th>Описание</th>
+                <th>Количество</th>
+                <th>Измеряется в</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for material in materials %}
-            <tr>
-                <td>{{ material.id }}</td>
-                <td>{{ material.MaterialName }}</td>
-                <td>{{ material.MaterialPrice }}</td>
-                <td>{{ material.MaterialDescription }}</td>
-                <td>{{ material.MaterialAmount }}</td>
-                <td>{{ material.MaterialMeasure }}</td>
-                <td>
-                    <a href="{{ path('app_material_show', {'id': material.id}) }}">show</a>
-                    <a href="{{ path('app_material_edit', {'id': material.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for material in materials %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_material_show', {'id': material.id}) }}">{{ material.MaterialName }}</a>
+                    </td>
+                    <td>{{ material.MaterialPrice }}</td>
+                    <td>{{ material.MaterialDescription }}</td>
+                    <td>{{ material.MaterialAmount }}</td>
+                    <td>{{ material.MaterialMeasure }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_material_new') }}">Create new</a>
+        <a href="{{ path('app_main_index') }}" class="btn btn-outline-success">На главную</a>
+    </div>
+
 {% endblock %}

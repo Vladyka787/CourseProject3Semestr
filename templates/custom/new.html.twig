@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Custom{% endblock %}
+{% block title %}Добавление заказа{% endblock %}
 
 {% block body %}
-    <h1>Create new Custom</h1>
+    <div class="container-fluid">
+        <h1>Добавление заказа</h1>
 
-    {{ include('custom/_form.html.twig') }}
+        {{ include('custom/_form.html.twig') }}
 
-    <a href="{{ path('app_custom_index') }}">back to list</a>
+        <a href="{{ path('app_custom_index') }}" class="btn btn-outline-primary" style="margin-top: 1em;">Вернуться к заказам</a>
+    </div>
 {% endblock %}

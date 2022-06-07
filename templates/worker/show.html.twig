@@ -1,38 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Worker{% endblock %}
+{% block title %}{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}{% endblock %}
 
 {% block body %}
-    <h1>Worker</h1>
+    <div class="container-fluid">
+        <h1>{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}</h1>
 
-    <table class="table">
-        <tbody>
+        <p>Телефон: {{ worker.workerPhone }}</p>
+        <h3>Работы:</h3>
+        {% for service in services %}
+            <p>
+                <a href="{{ path('app_service_show', {'id': service.id}) }}">{{ service.serviceDescription}}</a>
+            </p>
+        {% else %}
             <tr>
-                <th>Id</th>
-                <td>{{ worker.id }}</td>
+                <td colspan="6">no records found</td>
             </tr>
-            <tr>
-                <th>WorkerFirstName</th>
-                <td>{{ worker.WorkerFirstName }}</td>
-            </tr>
-            <tr>
-                <th>WorkerMiddleName</th>
-                <td>{{ worker.WorkerMiddleName }}</td>
-            </tr>
-            <tr>
-                <th>WorkerLastName</th>
-                <td>{{ worker.WorkerLastName }}</td>
-            </tr>
-            <tr>
-                <th>WorkerPhone</th>
-                <td>{{ worker.WorkerPhone }}</td>
-            </tr>
-        </tbody>
-    </table>
+        {% endfor %}
 
-    <a href="{{ path('app_worker_index') }}">back to list</a>
+        <p style="margin-bottom: 1em; margin-top: 1em;">
+            <a href="{{ path('app_worker_index') }}" class="btn btn-outline-primary">К списку работников</a>
 
-    <a href="{{ path('app_worker_edit', {'id': worker.id}) }}">edit</a>
-
-    {{ include('worker/_delete_form.html.twig') }}
+            <a href="{{ path('app_worker_edit', {'id': worker.id}) }}"
+               class="btn btn-outline-secondary">Редактировать</a>
+        </p>
+        {{ include('worker/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

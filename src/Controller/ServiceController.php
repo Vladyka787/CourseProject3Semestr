@@ -51,8 +51,16 @@ class ServiceController extends AbstractController
      */
     public function show(Service $service): Response
     {
+        $worker = $service->getWorker();
+        $bay = $service->getBay();
+        $custom = $service->getCustom();
+        $materials = $service->getMaterial()->getValues();
         return $this->render('service/show.html.twig', [
+            'worker' => $worker,
             'service' => $service,
+            'bay' => $bay,
+            'custom' => $custom,
+            'materials' => $materials,
         ]);
     }
 
@@ -81,7 +89,7 @@ class ServiceController extends AbstractController
      */
     public function delete(Request $request, Service $service, ServiceRepository $serviceRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $service->getId(), $request->request->get('_token'))) {
             $serviceRepository->remove($service, true);
         }
 

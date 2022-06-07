@@ -1,26 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bay{% endblock %}
+{% block title %}Бокс №{{ bay.id }}{% endblock %}
 
 {% block body %}
-    <h1>Bay</h1>
+    <div class="container-fluid">
+        <h1>Бокс №{{ bay.id }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ bay.id }}</td>
-            </tr>
-            <tr>
-                <th>BayType</th>
-                <td>{{ bay.BayType }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <h3>Тип бокса: {{ bay.bayType }}</h3>
 
-    <a href="{{ path('app_bay_index') }}">back to list</a>
+        <p>Работают в боксе:</p>
+        {% for worker in workers %}
+            <p>
+                <a href="{{ path('app_worker_show', {'id': worker.id}) }}">{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}</a>
+            </p>
+        {% endfor %}
 
-    <a href="{{ path('app_bay_edit', {'id': bay.id}) }}">edit</a>
+        <a href="{{ path('app_bay_index') }}" class="btn btn-primary">Вернуться к боксам</a>
 
-    {{ include('bay/_delete_form.html.twig') }}
+        <a href="{{ path('app_bay_edit', {'id': bay.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
+
+        {{ include('bay/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

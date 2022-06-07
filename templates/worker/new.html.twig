@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Worker{% endblock %}
+{% block title %}Добавление работника{% endblock %}
 
 {% block body %}
-    <h1>Create new Worker</h1>
+    <div class="container-fluid">
+        <h1>Добавить нового работника</h1>
 
-    {{ include('worker/_form.html.twig') }}
+        {{ include('worker/_form.html.twig') }}
 
-    <a href="{{ path('app_worker_index') }}">back to list</a>
+        <a href="{{ path('app_worker_index') }}" class="btn btn-outline-primary" style="margin-top: 1em;">К списку
+            работников</a>
+    </div>
 {% endblock %}

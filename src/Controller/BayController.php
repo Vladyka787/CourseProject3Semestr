@@ -51,8 +51,10 @@ class BayController extends AbstractController
      */
     public function show(Bay $bay): Response
     {
+        $workers = $bay->getWorker()->getValues();
         return $this->render('bay/show.html.twig', [
             'bay' => $bay,
+            'workers' => $workers,
         ]);
     }
 
@@ -81,7 +83,7 @@ class BayController extends AbstractController
      */
     public function delete(Request $request, Bay $bay, BayRepository $bayRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$bay->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $bay->getId(), $request->request->get('_token'))) {
             $bayRepository->remove($bay, true);
         }
 

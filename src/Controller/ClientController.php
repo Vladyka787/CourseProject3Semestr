@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
+use App\Repository\CustomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,10 +50,12 @@ class ClientController extends AbstractController
     /**
      * @Route("/{id}", name="app_client_show", methods={"GET"})
      */
-    public function show(Client $client): Response
+    public function show(Client $client, CustomRepository $customRepository): Response
     {
+        $customs=$customRepository->findBy(['Client' => $client->getId()]);
         return $this->render('client/show.html.twig', [
             'client' => $client,
+            'customs' => $customs,
         ]);
     }
 

@@ -51,8 +51,11 @@ class MaterialController extends AbstractController
      */
     public function show(Material $material): Response
     {
+        $service = $material->getService();
+
         return $this->render('material/show.html.twig', [
             'material' => $material,
+            'service' => $service,
         ]);
     }
 
@@ -81,7 +84,7 @@ class MaterialController extends AbstractController
      */
     public function delete(Request $request, Material $material, MaterialRepository $materialRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$material->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $material->getId(), $request->request->get('_token'))) {
             $materialRepository->remove($material, true);
         }
 

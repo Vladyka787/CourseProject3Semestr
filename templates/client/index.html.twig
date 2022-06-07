@@ -6,38 +6,6 @@
     <div class="container-fluid">
         <h1>Наши клиенты</h1>
 
-        {#        <table class="table"> #}
-        {#            <thead> #}
-        {#            <tr> #}
-        {#                <th>Id</th> #}
-        {#                <th>CustomerPhone</th> #}
-        {#                <th>CustomerFirstName</th> #}
-        {#                <th>CustomerMiddleName</th> #}
-        {#                <th>CustomerLastName</th> #}
-        {#                <th>actions</th> #}
-        {#            </tr> #}
-        {#            </thead> #}
-        {#            <tbody> #}
-        {#            {% for client in clients %} #}
-        {#                <tr> #}
-        {#                    <td>{{ client.id }}</td> #}
-        {#                    <td>{{ client.CustomerPhone }}</td> #}
-        {#                    <td>{{ client.CustomerFirstName }}</td> #}
-        {#                    <td>{{ client.CustomerMiddleName }}</td> #}
-        {#                    <td>{{ client.CustomerLastName }}</td> #}
-        {#                    <td> #}
-        {#                        <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a> #}
-        {#                        <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a> #}
-        {#                    </td> #}
-        {#                </tr> #}
-        {#            {% else %} #}
-        {#                <tr> #}
-        {#                    <td colspan="6">no records found</td> #}
-        {#                </tr> #}
-        {#            {% endfor %} #}
-        {#            </tbody> #}
-        {#        </table> #}
-
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for client in clients %}
                 <div class="col">
@@ -53,17 +21,6 @@
                     </div>
                 </div>
 
-                {#                <tr> #}
-                {#                    <td>{{ client.id }}</td> #}
-                {#                    <td>{{ client.CustomerPhone }}</td> #}
-                {#                    <td>{{ client.CustomerFirstName }}</td> #}
-                {#                    <td>{{ client.CustomerMiddleName }}</td> #}
-                {#                    <td>{{ client.CustomerLastName }}</td> #}
-                {#                    <td> #}
-                {#                        <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a> #}
-                {#                        <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a> #}
-                {#                    </td> #}
-                {#                </tr> #}
             {% else %}
                 <tr>
                     <td colspan="6">no records found</td>

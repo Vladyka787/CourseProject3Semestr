@@ -1,35 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bay index{% endblock %}
+{% block title %}Наши боксы{% endblock %}
 
 {% block body %}
-    <h1>Bay index</h1>
+    <div class="container-fluid">
+        <h1>Наши боксы</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>BayType</th>
-                <th>actions</th>
+                <th>Номер бокса</th>
+                <th>Тип бокса</th>
+                <th>Действия</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for bay in bays %}
-            <tr>
-                <td>{{ bay.id }}</td>
-                <td>{{ bay.BayType }}</td>
-                <td>
-                    <a href="{{ path('app_bay_show', {'id': bay.id}) }}">show</a>
-                    <a href="{{ path('app_bay_edit', {'id': bay.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for bay in bays %}
+                <tr>
+                    <td>{{ bay.id }}</td>
+                    <td>{{ bay.BayType }}</td>
+                    <td>
+                        <a href="{{ path('app_bay_show', {'id': bay.id}) }}" class="btn btn-outline-primary">Изучить</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_bay_new') }}">Create new</a>
+        <a href="{{ path('app_bay_new') }}" class="btn btn-primary">Добавить бокс</a>
+        <a href="{{ path('app_main_index') }}" class="btn btn-outline-success">На главную</a>
+    </div>
 {% endblock %}

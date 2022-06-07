@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Material{% endblock %}
+{% block title %}Новый материал{% endblock %}
 
 {% block body %}
-    <h1>Create new Material</h1>
+    <div class="container-fluid">
+        <h1>Добавить материал</h1>
 
-    {{ include('material/_form.html.twig') }}
+        {{ include('material/_form.html.twig') }}
 
-    <a href="{{ path('app_material_index') }}">back to list</a>
+        <a href="{{ path('app_material_index') }}" class="btn btn-primary">Вернуться к материалам</a>
+    </div>
 {% endblock %}

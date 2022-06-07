@@ -1,41 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Worker index{% endblock %}
+{% block title %}Работники{% endblock %}
 
 {% block body %}
-    <h1>Worker index</h1>
+    <div class="container-fluid">
+        <h1>Работники</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>WorkerFirstName</th>
-                <th>WorkerMiddleName</th>
-                <th>WorkerLastName</th>
-                <th>WorkerPhone</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for worker in workers %}
-            <tr>
-                <td>{{ worker.id }}</td>
-                <td>{{ worker.WorkerFirstName }}</td>
-                <td>{{ worker.WorkerMiddleName }}</td>
-                <td>{{ worker.WorkerLastName }}</td>
-                <td>{{ worker.WorkerPhone }}</td>
-                <td>
-                    <a href="{{ path('app_worker_show', {'id': worker.id}) }}">show</a>
-                    <a href="{{ path('app_worker_edit', {'id': worker.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for worker in workers %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ worker.workerPhone }}</h5>
+                            <p class="card-text">{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}</p>
+                            <p>
+                                <a href="{{ path('app_worker_show', {'id': worker.id}) }}" class="btn btn-outline-primary">Подробнее</a>
+                                <a href="{{ path('app_worker_edit', {'id': worker.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-    <a href="{{ path('app_worker_new') }}">Create new</a>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+        </div>
+        <p style="margin-top: 1em">
+            <a href="{{ path('app_worker_new') }}" class="btn btn-primary">Добавить работника</a>
+            <a href="{{ path('app_main_index') }}" class="btn btn-outline-success">На главную</a>
+        </p>
+    </div>
 {% endblock %}

@@ -1,42 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Material{% endblock %}
+{% block title %}{{ material.materialName }}{% endblock %}
 
 {% block body %}
-    <h1>Material</h1>
+    <div class="container-fluid">
+        <h1>{{ material.materialName }}</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ material.id }}</td>
-            </tr>
-            <tr>
-                <th>MaterialName</th>
-                <td>{{ material.MaterialName }}</td>
-            </tr>
-            <tr>
-                <th>MaterialPrice</th>
+                <th>Стоимость</th>
                 <td>{{ material.MaterialPrice }}</td>
             </tr>
             <tr>
-                <th>MaterialDescription</th>
+                <th>Описание</th>
                 <td>{{ material.MaterialDescription }}</td>
             </tr>
             <tr>
-                <th>MaterialAmount</th>
-                <td>{{ material.MaterialAmount }}</td>
+                <th>Количество и единицы измерения</th>
+                <td>{{ material.MaterialAmount }} {{ material.materialMeasure }}</td>
             </tr>
             <tr>
-                <th>MaterialMeasure</th>
-                <td>{{ material.MaterialMeasure }}</td>
+                <th>Для услуги</th>
+                <td><a href="{{ path('app_service_show', {'id': service.id}) }}">{{ service.serviceDescription }}</a>
+                </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_material_index') }}">back to list</a>
+        <a href="{{ path('app_material_index') }}" class="btn btn-primary">Вернуться к материалам</a>
 
-    <a href="{{ path('app_material_edit', {'id': material.id}) }}">edit</a>
+        <a href="{{ path('app_material_edit', {'id': material.id}) }}"
+           class="btn btn-outline-secondary">Редактировать</a>
 
-    {{ include('material/_delete_form.html.twig') }}
+        {{ include('material/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

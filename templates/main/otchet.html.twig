@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Автосервис{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <h1 style="margin-bottom: 1em;">Автосервис: Отчеты</h1>
+
+        {#        mintcream lightcyan lightgoldenrodyellow linen azure #}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Отчет о клиентах</h5>
+                        <p class="card-text">Телефон и ФИО каждого клиента.</p>
+                        <a href="{{ path('app_main_otchet_1') }}" class="btn btn-outline-">Получить</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Отчет о сотрудниках</h5>
+                        <p class="card-text">Телефон и ФИО каждого сотрудника.</p>
+                        <a href="{{ path('app_main_otchet_2') }}" class="btn btn-outline-">Получить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <style>
+            .btn-outline- {
+                color: sandybrown;
+                border-color: sandybrown;
+            }
+
+            .btn-outline-:hover {
+                color: #000;
+                background-color: sandybrown;
+                border-color: sandybrown;
+            }
+        </style>
+    </div>
+{% endblock %}
