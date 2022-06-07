@@ -1,41 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Client index{% endblock %}
+{% block title %}Наши клиенты{% endblock %}
 
 {% block body %}
-    <h1>Client index</h1>
+    <div class="container-fluid">
+        <h1>Наши клиенты</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>CustomerPhone</th>
-                <th>CustomerFirstName</th>
-                <th>CustomerMiddleName</th>
-                <th>CustomerLastName</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for client in clients %}
-            <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.CustomerPhone }}</td>
-                <td>{{ client.CustomerFirstName }}</td>
-                <td>{{ client.CustomerMiddleName }}</td>
-                <td>{{ client.CustomerLastName }}</td>
-                <td>
-                    <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {#        <table class="table"> #}
+        {#            <thead> #}
+        {#            <tr> #}
+        {#                <th>Id</th> #}
+        {#                <th>CustomerPhone</th> #}
+        {#                <th>CustomerFirstName</th> #}
+        {#                <th>CustomerMiddleName</th> #}
+        {#                <th>CustomerLastName</th> #}
+        {#                <th>actions</th> #}
+        {#            </tr> #}
+        {#            </thead> #}
+        {#            <tbody> #}
+        {#            {% for client in clients %} #}
+        {#                <tr> #}
+        {#                    <td>{{ client.id }}</td> #}
+        {#                    <td>{{ client.CustomerPhone }}</td> #}
+        {#                    <td>{{ client.CustomerFirstName }}</td> #}
+        {#                    <td>{{ client.CustomerMiddleName }}</td> #}
+        {#                    <td>{{ client.CustomerLastName }}</td> #}
+        {#                    <td> #}
+        {#                        <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a> #}
+        {#                        <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a> #}
+        {#                    </td> #}
+        {#                </tr> #}
+        {#            {% else %} #}
+        {#                <tr> #}
+        {#                    <td colspan="6">no records found</td> #}
+        {#                </tr> #}
+        {#            {% endfor %} #}
+        {#            </tbody> #}
+        {#        </table> #}
 
-    <a href="{{ path('app_client_new') }}">Create new</a>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for client in clients %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ client.customerPhone }}</h5>
+                            <p class="card-text">{{ client.customerMiddleName }} {{ client.customerFirstName }} {{ client.customerLastName }}</p>
+                            <p>
+                                <a href="{{ path('app_client_show', {'id': client.id}) }}" class="btn btn-outline-primary">Подробнее</a>
+                                <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {#                <tr> #}
+                {#                    <td>{{ client.id }}</td> #}
+                {#                    <td>{{ client.CustomerPhone }}</td> #}
+                {#                    <td>{{ client.CustomerFirstName }}</td> #}
+                {#                    <td>{{ client.CustomerMiddleName }}</td> #}
+                {#                    <td>{{ client.CustomerLastName }}</td> #}
+                {#                    <td> #}
+                {#                        <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a> #}
+                {#                        <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a> #}
+                {#                    </td> #}
+                {#                </tr> #}
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+        </div>
+        <p style="margin-top: 1em">
+            <a href="{{ path('app_client_new') }}" class="btn btn-primary">Добавить клиента</a>
+            <a href="{{ path('app_main_index') }}" class="btn btn-outline-success">На главную</a>
+        </p>
+    </div>
 {% endblock %}

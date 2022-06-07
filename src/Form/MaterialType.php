@@ -3,12 +3,22 @@
 namespace App\Form;
 
 use App\Entity\Material;
+use App\Form\DataTransformer\ServiceToStringTransformer;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class MaterialType extends AbstractType
 {
+    private $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -17,7 +27,12 @@ class MaterialType extends AbstractType
             ->add('MaterialDescription')
             ->add('MaterialAmount')
             ->add('MaterialMeasure')
-            ->add('Service')
+            ->add('Service', HiddenType::class, array(
+                // сообщение валидации при ошибке преобразователя данных
+                'invalid_message' => 'That is not a valid issue number',
+            ));
+
+        $builder->get('Service')->addModelTransformer(new ServiceToStringTransformer($this->em));
         ;
     }
 

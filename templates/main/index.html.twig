@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Автосервис{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <h1 style="margin-bottom: 1em;">Автосервис: Главная</h1>
+
+        {#        mintcream lightcyan lightgoldenrodyellow linen azure #}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Клиенты</h5>
+                        <p class="card-text">Добавление и удаление клиента автосервиса, а так же просмотр и обновление
+                            данных.</p>
+                        <a href="{{ path('app_client_index') }}" class="btn btn-outline-">Перейти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Работники</h5>
+                        <p class="card-text">Добавление и удаление сотрудников автосервиса, а так же просмотр и
+                            обновление данных.</p>
+                        <a href="{{ path('app_worker_index') }}" class="btn btn-outline-">Перейти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Заказы</h5>
+                        <p class="card-text">Добавление и удаление заказов клиентов, а так же просмотр и обновление
+                            данных.</p>
+                        <a href="{{ path('app_custom_index') }}" class="btn btn-outline-">Перейти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Боксы</h5>
+                        <p class="card-text">Добавление и удаление рабочих помещений, а так же просмотр и обновление
+                            данных.</p>
+                        <a href="{{ path('app_bay_index') }}" class="btn btn-outline-">Перейти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="background-color: lightgoldenrodyellow;">
+                    <div class="card-body"><h5 class="card-title">Отчеты</h5>
+                        <p class="card-text">Получение сводных данных в удобном виде, путем обработки накопленной
+                            информации.</p>
+                        <a href="{{ path('app_bay_index') }}" class="btn btn-outline-">Перейти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .btn-outline- {
+                color: sandybrown;
+                border-color: sandybrown;
+            }
+
+            .btn-outline-:hover {
+                color: #000;
+                background-color: sandybrown;
+                border-color: sandybrown;
+            }
+        </style>
+    </div>
+{% endblock %}
