@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MaterialRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=MaterialRepository::class)
@@ -24,6 +25,7 @@ class Material
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\GreaterThan(0)
      */
     private $MaterialPrice;
 
@@ -34,6 +36,7 @@ class Material
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThan(0)
      */
     private $MaterialAmount;
 
