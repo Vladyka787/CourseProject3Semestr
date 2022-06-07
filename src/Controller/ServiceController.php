@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Service;
 use App\Form\ServiceType;
+use App\Repository\CustomRepository;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,16 +29,20 @@ class ServiceController extends AbstractController
     /**
      * @Route("/new", name="app_service_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, ServiceRepository $serviceRepository): Response
+    public function new(Request $request, ServiceRepository $serviceRepository, CustomRepository $customRepository): Response
     {
         $service = new Service();
-        $form = $this->createForm(ServiceType::class, $service);
+        $custom_id=$request->query->get('custom_id');
+        $custom = $customRepository->findBy(['id' => $custom_id]);
+        $custom=$custom[0];
+        $service->setCustom($custom);
+        $form = $this->createForm(ServiceType::class, $service, ['custom_id' => $custom_id]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $serviceRepository->add($service, true);
 
-            return $this->redirectToRoute('app_service_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_service_show', ['id' => $service->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('service/new.html.twig', [

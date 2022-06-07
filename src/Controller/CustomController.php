@@ -30,21 +30,25 @@ class CustomController extends AbstractController
     /**
      * @Route("/new", name="app_custom_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, CustomRepository $customRepository): Response
+    public function new(Request $request, CustomRepository $customRepository, ClientRepository $clientRepository): Response
     {
         $custom = new Custom();
-        $form = $this->createForm(CustomType::class, $custom);
+        $client_id=$request->query->get('client_id');
+        $client = $clientRepository->findBy(['id' => $client_id]);
+        $client=$client[0];
+        $custom->setClient($client);
+        $form = $this->createForm(CustomType::class, $custom, ['client_id' => $client_id]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $customRepository->add($custom, true);
-
-            return $this->redirectToRoute('app_custom_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_custom_show', ['id' => $custom->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('custom/new.html.twig', [
             'custom' => $custom,
             'form' => $form,
+            'client' =>$client,
         ]);
     }
 

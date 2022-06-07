@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <th>Кто занимается</th>
-                <td><a href="{{ path('app_worker_show', {'id': worker.id}) }}">{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}</a></td>
+                <td><a href="{{ path('app_worker_show', {'id': worker.id}) }}" >{{ worker.workerMiddleName }} {{ worker.workerFirstName }} {{ worker.workerLastName }}</a></td>
             </tr>
             <tr>
                 <th>К какому заказу относится</th>
@@ -40,6 +40,9 @@
         <a href="{{ path('app_service_index') }}" class="btn btn-primary">Вернуться к услугам</a>
 
         <a href="{{ path('app_service_edit', {'id': service.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
+
+        <a href="{{ path('app_material_new', {'service_id': service.id}) }}"
+           class="btn btn-outline-success" role="button">Добавить материал</a>
 
         {{ include('service/_delete_form.html.twig') }}
     </div>

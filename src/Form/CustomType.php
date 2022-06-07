@@ -40,6 +40,7 @@ class CustomType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Custom::class,
+            'client_id' => 0,
         ]);
     }
 }

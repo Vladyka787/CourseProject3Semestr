@@ -37,7 +37,7 @@ class ServiceType extends AbstractType
                 // сообщение валидации при ошибке преобразователя данных
                 'invalid_message' => 'That is not a valid issue number',
             ))
-            ->add('Bay', HiddenType::class, array(
+            ->add('Bay', TextType::class, array(
                 // сообщение валидации при ошибке преобразователя данных
                 'invalid_message' => 'That is not a valid issue number',
             ))
@@ -45,7 +45,7 @@ class ServiceType extends AbstractType
                 // сообщение валидации при ошибке преобразователя данных
                 'invalid_message' => 'That is not a valid issue number',
             ))
-            ->add('Worker', HiddenType::class, array(
+            ->add('Worker', TextType::class, array(
                 // сообщение валидации при ошибке преобразователя данных
                 'invalid_message' => 'That is not a valid issue number',
             ));
@@ -60,6 +60,7 @@ class ServiceType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Service::class,
+            'custom_id' => 0,
         ]);
     }
 }

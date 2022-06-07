@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MaterialType extends AbstractType
 {
@@ -27,7 +28,7 @@ class MaterialType extends AbstractType
             ->add('MaterialDescription')
             ->add('MaterialAmount')
             ->add('MaterialMeasure')
-            ->add('Service', HiddenType::class, array(
+            ->add('Service', TextType::class, array(
                 // сообщение валидации при ошибке преобразователя данных
                 'invalid_message' => 'That is not a valid issue number',
             ));
@@ -40,6 +41,7 @@ class MaterialType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Material::class,
+            'service_id' =>0,
         ]);
     }
 }

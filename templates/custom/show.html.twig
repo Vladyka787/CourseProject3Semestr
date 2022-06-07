@@ -37,6 +37,9 @@
 
         <a href="{{ path('app_custom_edit', {'id': custom.id}) }}" class="btn btn-outline-secondary">Редактировать</a>
 
+        <a href="{{ path('app_service_new', {'custom_id': custom.id}) }}"
+           class="btn btn-outline-success" role="button">Добавить услугу</a>
+
         {{ include('custom/_delete_form.html.twig') }}
     </div>
 {% endblock %}

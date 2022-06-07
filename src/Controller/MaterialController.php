@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Material;
 use App\Form\MaterialType;
 use App\Repository\MaterialRepository;
+use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,16 +29,20 @@ class MaterialController extends AbstractController
     /**
      * @Route("/new", name="app_material_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, MaterialRepository $materialRepository): Response
+    public function new(Request $request, MaterialRepository $materialRepository, ServiceRepository $serviceRepository): Response
     {
         $material = new Material();
-        $form = $this->createForm(MaterialType::class, $material);
+        $service_id=$request->query->get('service_id');
+        $service = $serviceRepository->findBy(['id' => $service_id]);
+        $service=$service[0];
+        $material->setService($service);
+        $form = $this->createForm(MaterialType::class, $material, ['service_id' => $service_id]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $materialRepository->add($material, true);
 
-            return $this->redirectToRoute('app_material_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_material_show', ['id' => $material->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('material/new.html.twig', [
